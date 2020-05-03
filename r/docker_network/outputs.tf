@@ -1,3 +1,8 @@
+output "driver" {
+  description = "returns a string"
+  value       = docker_network.this.driver
+}
+
 output "id" {
   description = "returns a string"
   value       = docker_network.this.id

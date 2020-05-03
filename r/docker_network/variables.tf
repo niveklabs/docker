@@ -40,12 +40,6 @@ variable "ipv6" {
   default     = null
 }
 
-variable "labels" {
-  description = "(optional)"
-  type        = map(string)
-  default     = null
-}
-
 variable "name" {
   description = "(required)"
   type        = string
@@ -65,6 +59,17 @@ variable "ipam_config" {
       gateway     = string
       ip_range    = string
       subnet      = string
+    }
+  ))
+  default = []
+}
+
+variable "labels" {
+  description = "nested mode: NestingSet, min items: 0, max items: 0"
+  type = set(object(
+    {
+      label = string
+      value = string
     }
   ))
   default = []

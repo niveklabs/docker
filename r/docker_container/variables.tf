@@ -87,12 +87,6 @@ variable "ipc_mode" {
   default     = null
 }
 
-variable "labels" {
-  description = "(optional)"
-  type        = map(string)
-  default     = null
-}
-
 variable "links" {
   description = "(optional)"
   type        = set(string)
@@ -290,6 +284,17 @@ variable "host" {
   default = []
 }
 
+variable "labels" {
+  description = "nested mode: NestingSet, min items: 0, max items: 0"
+  type = set(object(
+    {
+      label = string
+      value = string
+    }
+  ))
+  default = []
+}
+
 variable "mounts" {
   description = "nested mode: NestingSet, min items: 0, max items: 0"
   type = set(object(
@@ -313,8 +318,13 @@ variable "mounts" {
         {
           driver_name    = string
           driver_options = map(string)
-          labels         = map(string)
-          no_copy        = bool
+          labels = set(object(
+            {
+              label = string
+              value = string
+            }
+          ))
+          no_copy = bool
         }
       ))
     }
@@ -368,6 +378,8 @@ variable "upload" {
       content_base64 = string
       executable     = bool
       file           = string
+      source         = string
+      source_hash    = string
     }
   ))
   default = []

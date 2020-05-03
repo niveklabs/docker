@@ -8,7 +8,6 @@ module "docker_network" {
   internal        = null
   ipam_driver     = null
   ipv6            = null
-  labels          = {}
   name            = null
   options         = {}
 
@@ -17,5 +16,10 @@ module "docker_network" {
     gateway     = null
     ip_range    = null
     subnet      = null
+  }]
+
+  labels = [{
+    label = null
+    value = null
   }]
 }
