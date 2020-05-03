@@ -1,7 +1,3 @@
-# docker Provider
-
-[embedmd]:# (docker.tf)
-```tf
 provider "docker" {
   version = "2.6.0"
 
@@ -18,4 +14,3 @@ provider "docker" {
     username    = null
   }
 }
-```

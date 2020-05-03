@@ -4,6 +4,12 @@ variable "auth" {
   default     = null
 }
 
+variable "labels" {
+  description = "(optional) - User-defined key/value metadata"
+  type        = map(string)
+  default     = null
+}
+
 variable "name" {
   description = "(required) - Name of the service"
   type        = string
@@ -25,7 +31,7 @@ variable "endpoint_spec" {
   type = set(object(
     {
       mode = string
-      ports = list(object(
+      ports = set(object(
         {
           name           = string
           protocol       = string
@@ -34,17 +40,6 @@ variable "endpoint_spec" {
           target_port    = number
         }
       ))
-    }
-  ))
-  default = []
-}
-
-variable "labels" {
-  description = "nested mode: NestingSet, min items: 0, max items: 0"
-  type = set(object(
-    {
-      label = string
-      value = string
     }
   ))
   default = []
@@ -92,10 +87,7 @@ variable "task_spec" {
             {
               config_id   = string
               config_name = string
-              file_gid    = string
-              file_mode   = number
               file_name   = string
-              file_uid    = string
             }
           ))
           dir = string
@@ -126,12 +118,7 @@ variable "task_spec" {
           ))
           image     = string
           isolation = string
-          labels = set(object(
-            {
-              label = string
-              value = string
-            }
-          ))
+          labels    = map(string)
           mounts = set(object(
             {
               bind_options = list(object(
@@ -153,13 +140,8 @@ variable "task_spec" {
                 {
                   driver_name    = string
                   driver_options = map(string)
-                  labels = set(object(
-                    {
-                      label = string
-                      value = string
-                    }
-                  ))
-                  no_copy = bool
+                  labels         = map(string)
+                  no_copy        = bool
                 }
               ))
             }
@@ -186,10 +168,7 @@ variable "task_spec" {
           read_only = bool
           secrets = set(object(
             {
-              file_gid    = string
-              file_mode   = number
               file_name   = string
-              file_uid    = string
               secret_id   = string
               secret_name = string
             }

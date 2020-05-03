@@ -1,5 +1,5 @@
 module "docker_network" {
-  source = "./docker/r/docker_network"
+  source = "./modules/docker/r/docker_network"
 
   attachable      = null
   check_duplicate = null
@@ -8,6 +8,7 @@ module "docker_network" {
   internal        = null
   ipam_driver     = null
   ipv6            = null
+  labels          = {}
   name            = null
   options         = {}
 
@@ -16,10 +17,5 @@ module "docker_network" {
     gateway     = null
     ip_range    = null
     subnet      = null
-  }]
-
-  labels = [{
-    label = null
-    value = null
   }]
 }

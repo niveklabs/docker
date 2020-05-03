@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    docker = ">= 2.7.0"
+    docker = ">= 2.6.0"
   }
 }
 
@@ -12,6 +12,7 @@ resource "docker_network" "this" {
   internal        = var.internal
   ipam_driver     = var.ipam_driver
   ipv6            = var.ipv6
+  labels          = var.labels
   name            = var.name
   options         = var.options
 
@@ -22,14 +23,6 @@ resource "docker_network" "this" {
       gateway     = ipam_config.value["gateway"]
       ip_range    = ipam_config.value["ip_range"]
       subnet      = ipam_config.value["subnet"]
-    }
-  }
-
-  dynamic "labels" {
-    for_each = var.labels
-    content {
-      label = labels.value["label"]
-      value = labels.value["value"]
     }
   }
 

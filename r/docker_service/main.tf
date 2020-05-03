@@ -1,12 +1,13 @@
 terraform {
   required_providers {
-    docker = ">= 2.7.0"
+    docker = ">= 2.6.0"
   }
 }
 
 resource "docker_service" "this" {
-  auth = var.auth
-  name = var.name
+  auth   = var.auth
+  labels = var.labels
+  name   = var.name
 
   dynamic "converge_config" {
     for_each = var.converge_config
@@ -32,14 +33,6 @@ resource "docker_service" "this" {
         }
       }
 
-    }
-  }
-
-  dynamic "labels" {
-    for_each = var.labels
-    content {
-      label = labels.value["label"]
-      value = labels.value["value"]
     }
   }
 
@@ -89,6 +82,7 @@ resource "docker_service" "this" {
           hostname          = container_spec.value["hostname"]
           image             = container_spec.value["image"]
           isolation         = container_spec.value["isolation"]
+          labels            = container_spec.value["labels"]
           read_only         = container_spec.value["read_only"]
           stop_grace_period = container_spec.value["stop_grace_period"]
           stop_signal       = container_spec.value["stop_signal"]
@@ -99,10 +93,7 @@ resource "docker_service" "this" {
             content {
               config_id   = configs.value["config_id"]
               config_name = configs.value["config_name"]
-              file_gid    = configs.value["file_gid"]
-              file_mode   = configs.value["file_mode"]
               file_name   = configs.value["file_name"]
-              file_uid    = configs.value["file_uid"]
             }
           }
 
@@ -134,14 +125,6 @@ resource "docker_service" "this" {
             }
           }
 
-          dynamic "labels" {
-            for_each = container_spec.value.labels
-            content {
-              label = labels.value["label"]
-              value = labels.value["value"]
-            }
-          }
-
           dynamic "mounts" {
             for_each = container_spec.value.mounts
             content {
@@ -170,16 +153,8 @@ resource "docker_service" "this" {
                 content {
                   driver_name    = volume_options.value["driver_name"]
                   driver_options = volume_options.value["driver_options"]
+                  labels         = volume_options.value["labels"]
                   no_copy        = volume_options.value["no_copy"]
-
-                  dynamic "labels" {
-                    for_each = volume_options.value.labels
-                    content {
-                      label = labels.value["label"]
-                      value = labels.value["value"]
-                    }
-                  }
-
                 }
               }
 
@@ -215,10 +190,7 @@ resource "docker_service" "this" {
           dynamic "secrets" {
             for_each = container_spec.value.secrets
             content {
-              file_gid    = secrets.value["file_gid"]
-              file_mode   = secrets.value["file_mode"]
               file_name   = secrets.value["file_name"]
-              file_uid    = secrets.value["file_uid"]
               secret_id   = secrets.value["secret_id"]
               secret_name = secrets.value["secret_name"]
             }

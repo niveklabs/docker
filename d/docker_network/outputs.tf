@@ -13,11 +13,6 @@ output "internal" {
   value       = data.docker_network.this.internal
 }
 
-output "ipam_config" {
-  description = "returns a set of object"
-  value       = data.docker_network.this.ipam_config
-}
-
 output "options" {
   description = "returns a map of string"
   value       = data.docker_network.this.options

@@ -1,5 +1,5 @@
 module "docker_container" {
-  source = "./docker/r/docker_container"
+  source = "./modules/docker/r/docker_container"
 
   attach                = null
   command               = []
@@ -16,6 +16,7 @@ module "docker_container" {
   hostname              = null
   image                 = null
   ipc_mode              = null
+  labels                = {}
   links                 = []
   log_driver            = null
   log_opts              = {}
@@ -66,11 +67,6 @@ module "docker_container" {
     ip   = null
   }]
 
-  labels = [{
-    label = null
-    value = null
-  }]
-
   mounts = [{
     bind_options = [{
       propagation = null
@@ -86,11 +82,8 @@ module "docker_container" {
     volume_options = [{
       driver_name    = null
       driver_options = {}
-      labels = [{
-        label = null
-        value = null
-      }]
-      no_copy = null
+      labels         = {}
+      no_copy        = null
     }]
   }]
 
@@ -119,8 +112,6 @@ module "docker_container" {
     content_base64 = null
     executable     = null
     file           = null
-    source         = null
-    source_hash    = null
   }]
 
   volumes = [{

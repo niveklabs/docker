@@ -1,8 +1,9 @@
 module "docker_service" {
-  source = "./docker/r/docker_service"
+  source = "./modules/docker/r/docker_service"
 
-  auth = {}
-  name = null
+  auth   = {}
+  labels = {}
+  name   = null
 
   converge_config = [{
     delay   = null
@@ -18,11 +19,6 @@ module "docker_service" {
       published_port = null
       target_port    = null
     }]
-  }]
-
-  labels = [{
-    label = null
-    value = null
   }]
 
   mode = [{
@@ -48,10 +44,7 @@ module "docker_service" {
       configs = [{
         config_id   = null
         config_name = null
-        file_gid    = null
-        file_mode   = null
         file_name   = null
-        file_uid    = null
       }]
       dir = null
       dns_config = [{
@@ -75,10 +68,7 @@ module "docker_service" {
       }]
       image     = null
       isolation = null
-      labels = [{
-        label = null
-        value = null
-      }]
+      labels    = {}
       mounts = [{
         bind_options = [{
           propagation = null
@@ -94,11 +84,8 @@ module "docker_service" {
         volume_options = [{
           driver_name    = null
           driver_options = {}
-          labels = [{
-            label = null
-            value = null
-          }]
-          no_copy = null
+          labels         = {}
+          no_copy        = null
         }]
       }]
       privileges = [{
@@ -116,10 +103,7 @@ module "docker_service" {
       }]
       read_only = null
       secrets = [{
-        file_gid    = null
-        file_mode   = null
         file_name   = null
-        file_uid    = null
         secret_id   = null
         secret_name = null
       }]

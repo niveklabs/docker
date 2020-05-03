@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    docker = ">= 2.7.0"
+    docker = ">= 2.6.0"
   }
 }
 
@@ -20,6 +20,7 @@ resource "docker_container" "this" {
   hostname              = var.hostname
   image                 = var.image
   ipc_mode              = var.ipc_mode
+  labels                = var.labels
   links                 = var.links
   log_driver            = var.log_driver
   log_opts              = var.log_opts
@@ -82,14 +83,6 @@ resource "docker_container" "this" {
     }
   }
 
-  dynamic "labels" {
-    for_each = var.labels
-    content {
-      label = labels.value["label"]
-      value = labels.value["value"]
-    }
-  }
-
   dynamic "mounts" {
     for_each = var.mounts
     content {
@@ -118,16 +111,8 @@ resource "docker_container" "this" {
         content {
           driver_name    = volume_options.value["driver_name"]
           driver_options = volume_options.value["driver_options"]
+          labels         = volume_options.value["labels"]
           no_copy        = volume_options.value["no_copy"]
-
-          dynamic "labels" {
-            for_each = volume_options.value.labels
-            content {
-              label = labels.value["label"]
-              value = labels.value["value"]
-            }
-          }
-
         }
       }
 
@@ -170,8 +155,6 @@ resource "docker_container" "this" {
       content_base64 = upload.value["content_base64"]
       executable     = upload.value["executable"]
       file           = upload.value["file"]
-      source         = upload.value["source"]
-      source_hash    = upload.value["source_hash"]
     }
   }
 
