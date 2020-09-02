@@ -13,14 +13,19 @@ output "container_logs" {
   value       = docker_container.this.container_logs
 }
 
+output "dns" {
+  description = "returns a set of string"
+  value       = docker_container.this.dns
+}
+
+output "dns_opts" {
+  description = "returns a set of string"
+  value       = docker_container.this.dns_opts
+}
+
 output "entrypoint" {
   description = "returns a list of string"
   value       = docker_container.this.entrypoint
-}
-
-output "env" {
-  description = "returns a set of string"
-  value       = docker_container.this.env
 }
 
 output "exit_code" {
@@ -81,6 +86,11 @@ output "shm_size" {
 output "user" {
   description = "returns a string"
   value       = docker_container.this.user
+}
+
+output "working_dir" {
+  description = "returns a string"
+  value       = docker_container.this.working_dir
 }
 
 output "this" {

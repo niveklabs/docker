@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    docker = ">= 2.7.1"
+    docker = ">= 2.7.2"
   }
 }
 

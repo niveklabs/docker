@@ -3,7 +3,7 @@
 [embedmd]:# (docker.tf)
 ```tf
 provider "docker" {
-  version = "2.7.1"
+  version = "2.7.2"
 
   # ca_material - (optional) is a type of string
   ca_material = null
