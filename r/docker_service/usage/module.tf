@@ -1,7 +1,9 @@
 module "docker_service" {
   source = "./modules/docker/r/docker_service"
 
+  # auth - (optional) is a type of map of string
   auth = {}
+  # name - (required) is a type of string
   name = null
 
   converge_config = [{

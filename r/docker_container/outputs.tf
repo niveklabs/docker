@@ -58,6 +58,16 @@ output "ipc_mode" {
   value       = docker_container.this.ipc_mode
 }
 
+output "log_driver" {
+  description = "returns a string"
+  value       = docker_container.this.log_driver
+}
+
+output "log_opts" {
+  description = "returns a map of string"
+  value       = docker_container.this.log_opts
+}
+
 output "network_data" {
   description = "returns a list of object"
   value       = docker_container.this.network_data
@@ -66,6 +76,11 @@ output "network_data" {
 output "shm_size" {
   description = "returns a number"
   value       = docker_container.this.shm_size
+}
+
+output "user" {
+  description = "returns a string"
+  value       = docker_container.this.user
 }
 
 output "this" {
